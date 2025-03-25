@@ -13,28 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Passo 1: Check out o código
     - name: Check out code
       uses: actions/checkout@v2
-
-    # Passo 2: Configurar Python
+      
     - name: Set up Python 3.x
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    # Passo 3: Instalar dependências
+    - name: Verificar versão do Python
+      run: python --version
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements.txt  
 
-    # Passo 4: Rodar os testes (se houver)
-    - name: Run tests
+    - name: Verificar pip
+      run: pip --version
+
+    - name: Run tests with pytest
       run: |
-        pytest
+        pytest  # Roda os testes com pytest
 
-    # Passo 5: Executar o código
     - name: Run d20 game script
       run: |
         python d20_game.py
